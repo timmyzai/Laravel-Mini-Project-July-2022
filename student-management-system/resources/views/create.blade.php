@@ -7,7 +7,7 @@
     </div>
     <div class="float-end">
         <a href="{{ route('student.index') }}" class="btn btn-info">
-            <i class="fa fa-plus-circle"></i> All Students
+            <i class="fa fa-arrow-left"></i> All Students
         </a>
     </div>
     <div class="clearfix"></div>
@@ -27,8 +27,9 @@
             <label for="gender" class="col-sm-2 col-form-label">Gender</label>
             <div class="col-sm-10">
                 <select class="form-select" id="gender" name="gender">
-                    <option>Male</option>
-                    <option>Female</option>
+                    @foreach ($genders as $gender)
+                    <option value="{{ $gender['value'] }}">{{ $gender['label'] }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -42,7 +43,12 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{{ route('student.index') }}" class="btn btn-secondary mr-2">
+            <i class="fa fa-arrow-left"></i> Cancel
+        </a>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-check"></i> Save
+        </button>
     </form>
 </div>
 

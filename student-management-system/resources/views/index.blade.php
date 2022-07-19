@@ -16,7 +16,7 @@
 @foreach ($students as $student)
 <div class="card">
     <div class="card-header">
-        {{ $student->name}}
+        {{ $student->name }}
 
         <span class="badge rounded-pill bg-warning text-dark">
             Created at: {{ $student->created_at }}
@@ -38,20 +38,29 @@
                     </tbody>
                 </table>
                 <small>Last Updated - {{ $student->updated_at->diffForHumans() }}</small>
-                <br><br>
             </div>
             <div class="float-end">
                 <a href="{{ route('student.edit', $student->id) }}" class="btn btn-success">
                     Edit
                 </a>
-                <a href="{{ route('student.edit', $student->id) }}" class="btn btn-danger">
-                    Delete
-                </a>
+                <form action="{{ route('student.destroy', $student->id) }}" style="display: inline" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">
+                        Delete
+                    </button>
+                </form>
             </div>
             <div class="clearfix"></div>
         </div>
     </div>
 </div>
 @endforeach
+
+@if (count($students) === 0)
+<div class="alert alert-danger p-2">
+    No Student Found.
+</div>
+@endif
 
 @endsection

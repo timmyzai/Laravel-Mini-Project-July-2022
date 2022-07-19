@@ -14,7 +14,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::get();
+        $students = Student::orderBy('id', 'desc')->get();
         return view('index', compact('students'));
     }
 
@@ -25,7 +25,17 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $genders = [
+            [
+                'label' => 'Male',
+                'value' => 'Male',
+            ],
+            [
+                'label' => 'Female',
+                'value' => 'Female',
+            ]
+        ];
+        return view('create', compact('genders'));
     }
 
     /**
@@ -68,7 +78,19 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        return view('edit');
+        $student = Student::findOrFail($id);
+        $genders = [
+            [
+                'label' => 'Male',
+                'value' => 'Male',
+            ],
+            [
+                'label' => 'Female',
+                'value' => 'Female',
+            ]
+        ];
+
+        return view('edit', compact('student', 'genders'));
     }
 
     /**
@@ -80,7 +102,17 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'phone_number' => 'required'
+        ]);
+
+        $student = Student::findOrFail($id);
+        $student->name = $request->name;
+        $student->gender = $request->gender;
+        $student->phone_number = $request->phone_number;
+        $student->save();
+        return redirect()->route('index');
     }
 
     /**
@@ -91,6 +123,8 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::findOrFail($id);
+        $student->delete();
+        return redirect()->route('index');
     }
 }

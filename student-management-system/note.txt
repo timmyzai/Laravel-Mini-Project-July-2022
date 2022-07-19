@@ -4,10 +4,12 @@ cd student-management-system/
 
 php artisan serve
 php artisan make:controller StudentController -r
+php artisan make:controller CourseController -r
 
 start xampp db server
 
 php artisan make:model Student -m
+php artisan make:model Course -m
 
 php artisan migrate
 php artisan migrate:refresh
