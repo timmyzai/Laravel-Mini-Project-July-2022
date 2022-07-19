@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -13,7 +14,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $students = Student::get();
+        return view('index', compact('students'));
     }
 
     /**
@@ -34,7 +36,17 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'phone_number' => 'required'
+        ]);
+
+        $student = new Student();
+        $student->name = $request->name;
+        $student->gender = $request->gender;
+        $student->phone_number = $request->phone_number;
+        $student->save();
+        return redirect()->route('index');
     }
 
     /**

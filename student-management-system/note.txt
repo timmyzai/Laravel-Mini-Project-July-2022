@@ -4,3 +4,12 @@ cd student-management-system/
 
 php artisan serve
 php artisan make:controller StudentController -r
+
+start xampp db server
+
+php artisan make:model Student -m
+
+php artisan migrate
+php artisan migrate:refresh
+
+install extension PHP Intelephense

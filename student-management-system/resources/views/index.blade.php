@@ -1,16 +1,57 @@
 @extends('layout')
 
 @section('content')
-<h4 class="pb-3">Students List</h4>
+<div>
+    <div class="float-start">
+        <h4 class="pb-3">Students List</h4>
+    </div>
+    <div class="float-end">
+        <a href="{{ route('student.create') }}" class="btn btn-info">
+            <i class="fa fa-plus-circle"></i> Create Task
+        </a>
+    </div>
+    <div class="clearfix"></div>
+</div>
 
+@foreach ($students as $student)
 <div class="card">
     <div class="card-header">
-        First Student
+        {{ $student->name}}
+
+        <span class="badge rounded-pill bg-warning text-dark">
+            Created at: {{ $student->created_at }}
+        </span>
     </div>
     <div class="card-body">
         <div class="card-text">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, qui voluptate quibusdam harum inventore ab dolor obcaecati officia, nulla molestias quaerat maxime libero voluptas soluta saepe iusto quis, magnam voluptatem?
+            <div class="float-start">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Gender</th>
+                            <td>{{ $student->gender }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Phone Number</th>
+                            <td>{{ $student->phone_number }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <small>Last Updated - {{ $student->updated_at->diffForHumans() }}</small>
+                <br><br>
+            </div>
+            <div class="float-end">
+                <a href="{{ route('student.edit', $student->id) }}" class="btn btn-success">
+                    Edit
+                </a>
+                <a href="{{ route('student.edit', $student->id) }}" class="btn btn-danger">
+                    Delete
+                </a>
+            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>
+@endforeach
+
 @endsection
