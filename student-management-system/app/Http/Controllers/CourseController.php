@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::orderBy('name')->get();
-        return view('student/index', compact('students'));
+        $courses = Course::orderBy('course_name')->get();
+        return view('course/index', compact('courses'));
     }
 
     /**
@@ -25,17 +25,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $genders = [
-            [
-                'label' => 'Male',
-                'value' => 'Male',
-            ],
-            [
-                'label' => 'Female',
-                'value' => 'Female',
-            ]
-        ];
-        return view('student/create', compact('genders'));
+        return view('course/create');
     }
 
     /**
@@ -47,15 +37,12 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'phone_number' => 'required'
+            'course_name' => 'required'
         ]);
 
-        $student = new Student();
-        $student->name = $request->name;
-        $student->gender = $request->gender;
-        $student->phone_number = $request->phone_number;
-        $student->save();
+        $course = new Course();
+        $course->course_name = $request->course_name;
+        $course->save();
         return redirect()->route('index');
     }
 
@@ -78,19 +65,9 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student = Student::findOrFail($id);
-        $genders = [
-            [
-                'label' => 'Male',
-                'value' => 'Male',
-            ],
-            [
-                'label' => 'Female',
-                'value' => 'Female',
-            ]
-        ];
+        $course = Course::findOrFail($id);
 
-        return view('student/edit', compact('student', 'genders'));
+        return view('course/edit', compact('course'));
     }
 
     /**
@@ -103,15 +80,12 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'phone_number' => 'required'
+            'course_name' => 'required'
         ]);
 
-        $student = Student::findOrFail($id);
-        $student->name = $request->name;
-        $student->gender = $request->gender;
-        $student->phone_number = $request->phone_number;
-        $student->save();
+        $course = Course::findOrFail($id);
+        $course->course_name = $request->course_name;
+        $course->save();
         return redirect()->route('index');
     }
 
@@ -123,8 +97,8 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $student = Student::findOrFail($id);
-        $student->delete();
+        $course = Course::findOrFail($id);
+        $course->delete();
         return redirect()->route('index');
     }
 }

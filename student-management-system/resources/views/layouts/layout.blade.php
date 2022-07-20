@@ -20,19 +20,27 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ route('student.create')}}">New Student</a>
+                  <a class="nav-link" href="{{ route('student.index')}}">Students</a>
                 </li>
-                <!-- <li class="nav-item dropdown">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('course.index')}}">Courses</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('exam_mark.index')}}">Exam Mark</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('report.index')}}">Reports</a>
+                </li>
+                <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
+                    Register
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item" href="{{ route('student.create')}}">New Student</a></li>
+                    <li><a class="dropdown-item" href="{{ route('course.create')}}">New Course</a></li>
+                    <li><a class="dropdown-item" href="{{ route('exam_mark.create')}}">New Exam Mark</a></li>
                   </ul>
-                </li> -->
+                </li>
               </ul>
               <!-- <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

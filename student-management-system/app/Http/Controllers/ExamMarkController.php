@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Student;
+use App\Models\Exam_mark;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class ExamMarkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +16,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::orderBy('name')->get();
-        return view('student/index', compact('students'));
+        $exam_marks = Exam_mark::orderBy('score')->get();
+        $students = Student::get();
+        $courses = Course::get();
+        return view('exam_mark/index', compact('exam_marks', 'students', 'courses'));
     }
 
     /**
@@ -25,17 +29,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $genders = [
-            [
-                'label' => 'Male',
-                'value' => 'Male',
-            ],
-            [
-                'label' => 'Female',
-                'value' => 'Female',
-            ]
-        ];
-        return view('student/create', compact('genders'));
+        $students = Student::get();
+        $courses = Course::get();
+        return view('exam_mark/create', compact('students', 'courses'));
     }
 
     /**
@@ -47,15 +43,16 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'phone_number' => 'required'
+            'score' => 'required',
+            'student_name' => 'required',
+            'course_name' => 'required'
         ]);
 
-        $student = new Student();
-        $student->name = $request->name;
-        $student->gender = $request->gender;
-        $student->phone_number = $request->phone_number;
-        $student->save();
+        $exam_mark = new Exam_mark();
+        $exam_mark->student_name = $request->student_name;
+        $exam_mark->course_name = $request->course_name;
+        $exam_mark->score = $request->score;
+        $exam_mark->save();
         return redirect()->route('index');
     }
 
@@ -78,19 +75,11 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student = Student::findOrFail($id);
-        $genders = [
-            [
-                'label' => 'Male',
-                'value' => 'Male',
-            ],
-            [
-                'label' => 'Female',
-                'value' => 'Female',
-            ]
-        ];
+        $exam_mark = Exam_mark::findOrFail($id);
+        $students = Student::get();
+        $courses = Course::get();
 
-        return view('student/edit', compact('student', 'genders'));
+        return view('exam_mark/edit', compact('exam_mark', 'students', 'courses'));
     }
 
     /**
@@ -103,15 +92,16 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'phone_number' => 'required'
+            'score' => 'required',
+            'student_name' => 'required',
+            'course_name' => 'required'
         ]);
 
-        $student = Student::findOrFail($id);
-        $student->name = $request->name;
-        $student->gender = $request->gender;
-        $student->phone_number = $request->phone_number;
-        $student->save();
+        $exam_mark = Exam_mark::findOrFail($id);
+        $exam_mark->student_name = $request->student_name;
+        $exam_mark->course_name = $request->course_name;
+        $exam_mark->score = $request->score;
+        $exam_mark->save();
         return redirect()->route('index');
     }
 
@@ -123,8 +113,8 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $student = Student::findOrFail($id);
-        $student->delete();
+        $exam_mark = Exam_mark::findOrFail($id);
+        $exam_mark->delete();
         return redirect()->route('index');
     }
 }

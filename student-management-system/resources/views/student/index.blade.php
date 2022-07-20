@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts/layout')
 
 @section('content')
 <div>
@@ -7,7 +7,7 @@
     </div>
     <div class="float-end">
         <a href="{{ route('student.create') }}" class="btn btn-info">
-            <i class="fa fa-plus-circle"></i> Create Task
+            <i class="fa fa-plus-circle"></i> Add Student
         </a>
     </div>
     <div class="clearfix"></div>
@@ -41,13 +41,13 @@
             </div>
             <div class="float-end">
                 <a href="{{ route('student.edit', $student->id) }}" class="btn btn-success">
-                    Edit
+                    <i class="fa fa-edit"></i> Edit
                 </a>
                 <form action="{{ route('student.destroy', $student->id) }}" style="display: inline" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">
-                        Delete
+                    <i class="fa fa-trash"></i> Delete
                     </button>
                 </form>
             </div>
