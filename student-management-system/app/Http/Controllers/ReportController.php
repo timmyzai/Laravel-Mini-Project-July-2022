@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Exam_mark;
 use Illuminate\Http\Request;
 
@@ -14,10 +15,9 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $math = Exam_mark::where('course_name', 'Math');
-        $total_math_score = $math->sum('score');
-        $total_math_student = $math->count();
-
-        return view('report/index', compact('total_math_score', 'total_math_student'));
+        $scoreByCourses = Exam_mark::get()->groupBy('course_name');
+        $scoreByStudents = Exam_mark::get()->groupBy('student_name');
+        
+        return view('report/index', compact('scoreByCourses', 'scoreByStudents'));
     }
 }
