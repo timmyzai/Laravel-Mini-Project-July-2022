@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\ExamMarkController;
+use App\Http\Controllers\ExamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +18,10 @@ use App\Http\Controllers\ExamMarkController;
 */
 
 Route::get('/', [StudentController::class, 'index'])->name('index');
+
 Route::resource('student', StudentController::class);
 Route::resource('course', CourseController::class);
-Route::resource('exam_mark', ExamMarkController::class);
+Route::resource('exam', ExamController::class);
 Route::resource('report', ReportController::class);
 Route::get('/exportScoreByCourse', [ReportController::class, 'exportScoreByCourse']);
-Route::get('/exportScoreByStudent', [ReportController::class, 'exportScoreByStudent']);
+Route::get('/exportScoreByStudent', [ReportController::class, 'exportScoreByStudent']); 

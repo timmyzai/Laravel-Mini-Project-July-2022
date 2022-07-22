@@ -26,7 +26,7 @@
                   <a class="nav-link" href="{{ route('course.index')}}">Courses</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ route('exam_mark.index')}}">Exam Mark</a>
+                  <a class="nav-link" href="{{ route('exam.index')}}">Exam</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('report.index')}}">Reports</a>
@@ -38,7 +38,7 @@
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{{ route('student.create')}}">New Student</a></li>
                     <li><a class="dropdown-item" href="{{ route('course.create')}}">New Course</a></li>
-                    <li><a class="dropdown-item" href="{{ route('exam_mark.create')}}">New Exam Mark</a></li>
+                    <li><a class="dropdown-item" href="{{ route('exam.create')}}">New Exam</a></li>
                   </ul>
                 </li>
               </ul>

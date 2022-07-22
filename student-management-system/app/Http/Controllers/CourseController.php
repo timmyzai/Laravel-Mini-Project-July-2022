@@ -43,7 +43,7 @@ class CourseController extends Controller
         $course = new Course();
         $course->course_name = $request->course_name;
         $course->save();
-        return redirect()->route('index');
+        return redirect()->route('course.index');
     }
 
     /**
@@ -86,7 +86,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
         $course->course_name = $request->course_name;
         $course->save();
-        return redirect()->route('index');
+        return redirect()->route('course.index');
     }
 
     /**
@@ -99,6 +99,6 @@ class CourseController extends Controller
     {
         $course = Course::findOrFail($id);
         $course->delete();
-        return redirect()->route('index');
+        return redirect()->route('course.index');
     }
 }

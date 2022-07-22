@@ -14,8 +14,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('exam_marks', function (Blueprint $table) {
+        Schema::create('exams', function (Blueprint $table) {
             $table->id();
+            // $table->bigInteger('student_id')->unsigned();
+            // $table->bigInteger('course_id')->unsigned();
+            // $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            // $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->string('student_name');
             $table->string('course_name');
             $table->integer('score');
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exam_marks');
+        Schema::dropIfExists('exams');
     }
 };

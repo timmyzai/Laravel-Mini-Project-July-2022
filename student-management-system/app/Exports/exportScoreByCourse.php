@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Exam_mark;
+use App\Models\Exam;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
@@ -23,7 +23,7 @@ class exportScoreByCourse implements FromCollection, WithHeadings
 
     public function collection()
     {
-        $scoreByCourses = Exam_mark::get()->groupBy('course_name');
+        $scoreByCourses = Exam::get()->groupBy('course_name');
         $collection = [];
 
         foreach ($scoreByCourses as $scoreByCourse) {

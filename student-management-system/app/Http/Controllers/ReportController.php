@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Excel;
-use App\Models\Exam_mark;
+use App\Models\Exam;
 use App\Exports\exportScoreByCourse;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\exportScoreByStudent;
 
 class ReportController extends Controller
@@ -16,8 +16,8 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $scoreByCourses = Exam_mark::get()->groupBy('course_name');
-        $scoreByStudents = Exam_mark::get()->groupBy('student_name');
+        $scoreByCourses = Exam::get()->groupBy('course_name');
+        $scoreByStudents = Exam::get()->groupBy('student_name');
         // return $scoreByCourses;
         return view('report/index', compact('scoreByCourses', 'scoreByStudents'));
     }

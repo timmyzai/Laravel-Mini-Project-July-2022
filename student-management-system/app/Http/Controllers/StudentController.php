@@ -56,7 +56,7 @@ class StudentController extends Controller
         $student->gender = $request->gender;
         $student->phone_number = $request->phone_number;
         $student->save();
-        return redirect()->route('index');
+        return redirect()->route('student.index');
     }
 
     /**
@@ -112,7 +112,7 @@ class StudentController extends Controller
         $student->gender = $request->gender;
         $student->phone_number = $request->phone_number;
         $student->save();
-        return redirect()->route('index');
+        return redirect()->route('student.index');
     }
 
     /**
@@ -125,6 +125,6 @@ class StudentController extends Controller
     {
         $student = Student::findOrFail($id);
         $student->delete();
-        return redirect()->route('index');
+        return redirect()->route('student.index');
     }
 }

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Student;
-use App\Models\Exam_mark;
+use App\Models\Exam;
 use Illuminate\Http\Request;
 
-class ExamMarkController extends Controller
+class ExamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,10 @@ class ExamMarkController extends Controller
      */
     public function index()
     {
-        $exam_marks = Exam_mark::orderBy('score')->get();
+        $exams = Exam::orderBy('score')->get();
         $students = Student::get();
         $courses = Course::get();
-        return view('exam_mark/index', compact('exam_marks', 'students', 'courses'));
+        return view('exam/index', compact('exams', 'students', 'courses'));
     }
 
     /**
@@ -31,7 +31,7 @@ class ExamMarkController extends Controller
     {
         $students = Student::get();
         $courses = Course::get();
-        return view('exam_mark/create', compact('students', 'courses'));
+        return view('exam/create', compact('students', 'courses'));
     }
 
     /**
@@ -42,18 +42,20 @@ class ExamMarkController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
-            'score' => 'required',
             'student_name' => 'required',
-            'course_name' => 'required'
+            'course_name' => 'required',
+            'score' => 'required'
         ]);
 
-        $exam_mark = new Exam_mark();
-        $exam_mark->student_name = $request->student_name;
-        $exam_mark->course_name = $request->course_name;
-        $exam_mark->score = $request->score;
-        $exam_mark->save();
-        return redirect()->route('index');
+        $exam = new Exam();
+        $exam->student_name = $request->student_name;
+        $exam->course_name = $request->course_name;
+        $exam->score = $request->score;
+        $exam->save();
+
+        return redirect()->route('exam.index');
     }
 
     /**
@@ -75,11 +77,11 @@ class ExamMarkController extends Controller
      */
     public function edit($id)
     {
-        $exam_mark = Exam_mark::findOrFail($id);
+        $exam = Exam::findOrFail($id);
         $students = Student::get();
         $courses = Course::get();
 
-        return view('exam_mark/edit', compact('exam_mark', 'students', 'courses'));
+        return view('exam/edit', compact('exam', 'students', 'courses'));
     }
 
     /**
@@ -97,12 +99,12 @@ class ExamMarkController extends Controller
             'course_name' => 'required'
         ]);
 
-        $exam_mark = Exam_mark::findOrFail($id);
-        $exam_mark->student_name = $request->student_name;
-        $exam_mark->course_name = $request->course_name;
-        $exam_mark->score = $request->score;
-        $exam_mark->save();
-        return redirect()->route('index');
+        $exam = Exam::findOrFail($id);
+        $exam->student_name = $request->student_name;
+        $exam->course_name = $request->course_name;
+        $exam->score = $request->score;
+        $exam->save();
+        return redirect()->route('exam.index');
     }
 
     /**
@@ -113,8 +115,8 @@ class ExamMarkController extends Controller
      */
     public function destroy($id)
     {
-        $exam_mark = Exam_mark::findOrFail($id);
-        $exam_mark->delete();
-        return redirect()->route('index');
+        $exam = Exam::findOrFail($id);
+        $exam->delete();
+        return redirect()->route('exam.index');
     }
 }

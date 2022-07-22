@@ -1,3 +1,6 @@
+database structure diagram:
+https://drive.google.com/file/d/1XEoly6GneB_TKw01GCRBCD30gau7oQmF/view?usp=sharing
+
 composer create-project laravel/laravel student-management-system
 
 cd student-management-system/
@@ -5,14 +8,14 @@ cd student-management-system/
 php artisan serve
 php artisan make:controller StudentController -r
 php artisan make:controller CourseController -r
-php artisan make:controller ExamMarkController -r
+php artisan make:controller ExamController -r
 php artisan make:controller ReportController -r
 
-start xampp db server
+--start xampp db server
 
 php artisan make:model Student -m
 php artisan make:model Course -m
-php artisan make:model Exam_mark -m
+php artisan make:model Exam -m
 php artisan make:model Report -m
 
 --run the following command to solve "your requirements could not be resolved" issue--
@@ -25,8 +28,8 @@ composer require phpoffice/phpspreadsheet
 --configure app.php & publish service--
 php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider"
 
-php artisan make:export exportScoreByCourse --model=Exam_mark
-php artisan make:export exportScoreByStudent --model=Exam_mark
+php artisan make:export exportScoreByCourse --model=Exam
+php artisan make:export exportScoreByStudent --model=Exam
 
 php artisan migrate
 php artisan migrate:refresh
