@@ -22,3 +22,5 @@ Route::resource('student', StudentController::class);
 Route::resource('course', CourseController::class);
 Route::resource('exam_mark', ExamMarkController::class);
 Route::resource('report', ReportController::class);
+Route::get('/exportScoreByCourse', [ReportController::class, 'exportScoreByCourse']);
+Route::get('/exportScoreByStudent', [ReportController::class, 'exportScoreByStudent']);
